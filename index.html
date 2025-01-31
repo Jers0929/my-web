@@ -14,29 +14,69 @@
             margin: 0;
             padding: 0;
             position: relative; 
+            padding-top: 60px; /* To prevent content from hiding under the fixed navbar */
         }
 
         header {
-            background: rgba(255, 255, 255, 0.2);
-            padding: 15px;
-            box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
+            position: fixed;
+            top: 10px;
+            left: 10px;
+            z-index: 10; /* Ensure buttons stay on top */
         }
-
-        nav button {
-            background-color: #ff4b5c;
-            color: white;
-            border: none;
-            padding: 10px 20px;
-            margin: 5px;
-            border-radius: 20px;
-            cursor: pointer;
-            transition: 0.3s;
+        .container {
+            padding: 50px;
         }
-
-        nav button:hover {
-            background-color: #ff1e42;
+        img {
+            width: 200px;
+            border-radius: 50%;
         }
+      
+        .home-section {
+    display: flex;
+    justify-content: center;  /* Center content horizontally */
+    align-items: center;      /* Center content vertically */
+    height: 100vh;            /* Full viewport height to center vertically */
+    flex-direction: column;   /* Stack text elements vertically */
+    text-align: center;       /* Center text alignment */
+}
 
+.home-section h2, .home-section p {
+    display: inline-block;    /* Keep text on the same line */
+    white-space: nowrap;      /* Prevent wrapping of text */
+    overflow: hidden;         /* Hide overflowing text */
+    font-size: 36px;          /* Adjust font size */
+    visibility: hidden;       /* Hide text initially */
+    margin: 0;                /* Remove any margins */
+    padding-right: 5px;       /* Simulate a typing cursor effect */
+    border-right: 4px solid black; /* Optional cursor styling */
+}
+
+.home-section p {
+    margin-top: 20px; /* Space between the h2 and p */
+}
+
+nav button {
+    background-color: rgb(14, 13, 13); /* Dark red background for buttons */
+    color: rgb(3, 3, 3);  /* White text */
+    border: none;
+    padding: 12px 20px;  /* Larger padding for better clickability */
+    margin: 0 10px;
+    border-radius: 25px;  /* Rounded corners for buttons */
+    cursor: pointer;
+    font-size: 16px;
+    transition: background-color 0.3s, transform 0.3s ease;
+}
+
+nav button:hover {
+    background-color: #ff3b3b;  /* Lighter red on hover */
+    transform: scale(1.1);  /* Slight scale effect on hover */
+}
+
+nav button:focus {
+    outline: none;  /* Remove default outline on button click */
+}
+
+        /* For sections */
         .section {
             padding: 50px 20px;
         }
@@ -52,75 +92,39 @@
             margin-right: auto;
         }
 
-        /* Floating Hearts */
-        .heart {
-            position: absolute;
-            width: 20px;
-            height: 20px;
-            background-color: red;
-            transform: rotate(45deg);
-            animation: float 4s infinite ease-in-out;
-        }
-
-        .heart::before,
-        .heart::after {
-            content: '';
-            position: absolute;
-            width: 20px;
-            height: 20px;
-            background-color: red;
-            border-radius: 50%;
-        }
-
-        .heart::before {
-            top: -10px;
-            left: 0;
-        }
-
-        .heart::after {
-            left: -10px;
-            top: 0;
-        }
-
-        @keyframes float {
-            0% { transform: translateY(0) rotate(45deg); }
-            50% { transform: translateY(-20px) rotate(45deg); }
-            100% { transform: translateY(0) rotate(45deg); }
-        }
-
         .gallery-container {
-    position: relative;
-    max-width: 100%; /* Adjust the width to be fully responsive */
-    margin: auto;
-    overflow: hidden;
-}
+            position: relative;
+            max-width: 100%; /* Adjust the width to be fully responsive */
+            margin: auto;
+            overflow: hidden;
+        }
 
-.gallery {
-    display: flex;
-    transition: transform 0.5s ease-in-out;
-    width: auto;
-}
+        .gallery {
+            display: flex;
+            transition: transform 0.5s ease-in-out;
+            width: auto;
+        }
 
-.gallery img {
-    width: 100%;  /* Images will now take up the full container width */
-    max-width: 240px; /* This will limit image size for larger screens */
-    height: auto;  /* Maintain aspect ratio */
-    margin: 10px;
-    border-radius: 15px;
-    box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.3);
-    transition: transform 0.3s ease-in-out;
-    cursor: pointer;
-}
+        .gallery img {
+            width: 100%;  /* Images will now take up the full container width */
+            max-width: 240px; /* This will limit image size for larger screens */
+            height: auto;  /* Maintain aspect ratio */
+            margin: 10px;
+            border-radius: 15px;
+            box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.3);
+            transition: transform 0.3s ease-in-out;
+            cursor: pointer;
+        }
 
-@media (max-width: 768px) {
-    .gallery img {
-        max-width: 120px; /* Make images smaller on mobile screens */
-    }
-}
+        @media (max-width: 768px) {
+            .gallery img {
+                max-width: 120px; /* Make images smaller on mobile screens */
+            }
+        }
 
-.gallery img:hover {
-    transform: scale(1.1);
-}
+        .gallery img:hover {
+            transform: scale(1.1);
+        }
 
         .gallery-btn {
             position: absolute;
@@ -143,39 +147,99 @@
         }
 
         /* Love Letter Effect */
-
-
         #fullMessage {
-    display: none;
-    opacity: 0;
-    transition: opacity 1s ease-in-out;
-    background-color: rgba(209, 187, 187, 0.8); 
-    border-radius: 15px;
-    max-width: 600px; /* Add this to limit the width */
-    margin: 20px auto; /* Center the letter */
-    padding: 20px;
-    text-align: left; /* Text alignment inside the letter */
+            display: none;
+            opacity: 0;
+            transition: opacity 1s ease-in-out;
+            background-color: rgba(112, 99, 99, 0.8); 
+            border-radius: 15px;
+            max-width: 600px; /* Add this to limit the width */
+            margin: 20px auto; /* Center the letter */
+            padding: 20px;
+            text-align: left; /* Text alignment inside the letter */
+        }
+
+        .timeline-container {
+            max-width: 700px;
+            margin: 50px auto;
+            padding: 20px;
+            background: rgb(255, 41, 95);
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+        }
+
+        .timeline-event {
+            margin: 20px 0;
+            text-align: center;
+            position: relative;
+        }
+
+        .timeline-event img {
+    width: 230px;
+    height: 230px;
+    object-fit: contain;
+    border-radius: 10px;
+    cursor: pointer;
+    transition: transform 0.3s ease-in-out; /* Ensure transition happens */
 }
+
+.timeline-event img:hover {
+    transform: scale(1.1);
+    transition: transform 0.3s ease-in-out;
+}
+
+
+        .event-date {
+            margin-top: 10px;
+            font-weight: bold;
+            color: #333;
+        }
+
+        .event-details {
+            display: none;
+            margin-top: 15px;
+            padding: 15px;
+            background: #4d4747;
+            color: white;
+            border-radius: 5px;
+            text-align: center;
+        }
+
+        /* Countdown Styles */
+        #countdown {
+            background-color: rgba(53, 49, 49, 0.7);
+            border-radius: 10px;
+            padding: 20px;
+            margin-top: 20px;
+            box-shadow: 2px 2px 8px rgba(0, 0, 0, 0.3);
+            text-align: center;
+        }
+
+        #timer {
+            font-size: 2em;
+            font-weight: bold;
+            color: #ff4b5c;
+        }
     </style>
 </head>
 <body>
     <header>
-        <h1>❤️❤️❤️</h1>
-        <nav>
+        <div class="nav-buttons">
             <button onclick="scrollToSection('home')">Home</button>
             <button onclick="scrollToSection('letter')">Love Letter</button>
             <button onclick="scrollToSection('gallery')">Gallery</button>
             <button onclick="scrollToSection('playlist')">Playlist</button>
-        </nav>
+            <button onclick="scrollToSection('timeline')">Timeline</button>
+            <button onclick="scrollToSection('countdown')">Special Event</button>
+        </div>
     </header>
-    <div class="heart" style="top: 10%; left: 10%;"></div>
-    <div class="heart" style="top: 20%; right: 10%;"></div>
 
-    <section id="home" class="section">
-        <h2>Welcome to this simple webpage, My Love! ❤️</h2>
-        <p>This webpage is specially made just for you and me. I Hope You Like it. I love you so much! 💕</p>
-        <p>Let's create and save our journey and memories here.  </p>
+    <section id="home" class="home-section">
+        <h2 id="homepage-heading">Welcome to this simple webpage, My Love! ❤️</h2>
+        <p id="homepage-paragraph">This is a page where we remember our moments together.</p>
+        <p id="homepage-paragraph">I Love You.</p>
             <img src="img11.jpg" alt="Logo" class="logo">
+
             
     </section>
     
@@ -195,8 +259,12 @@
             <p>Forever and always yours,</p>
             <p><strong>Jerwin</strong></p>
         </div>
+
+       
     
     <section id="gallery" class="section">
+        <br>
+        <br>
         <h2>Our Sweet Memories</h2>
         <div class="gallery-container">
             <button class="gallery-btn prev" onclick="prevSlide()">&#10094;</button>
@@ -235,23 +303,74 @@
         <iframe style="border-radius:12px" src="https://open.spotify.com/embed/track/06IkOr83qPqa3yYvrIjgxp?utm_source=generator" width="100%" height="80" frameBorder="0" allowfullscreen="" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe>
   
     </section>
+    <section id="timeline" class="section">
+        <h2>Our Timeline</h2>
+    <div class="timeline-container">
+        <div class="timeline-event">
+            <img src="img24.jpg" alt="Event 1" onclick="toggleDetails(1)">
+            <div class="event-date">August 16, 2024</div>
+            <div class="event-details" id="event1-details">
+                <h3>First Meet</h3>
+                <p>First time natin magmeet, nagkakahiyaan pa pero nag enjoy naman kahit papano. Una palang, ramdam ko na agad na ikaw na talaga hehe
+                </p>
+            </div>
+        </div>
+    
+        <div class="timeline-event">
+            <img src="img4.jpg" alt="Event 2" onclick="toggleDetails(2)">
+            <div class="event-date">August 24, 2024</div>
+            <div class="event-details" id="event2-details">
+                <h3>First Date na walang label 😄</h3>
+                <p>This was the first time we go out. First time manood ng sine na magkasama at yun din yung first time kong makapasok sa cinehan. It was a great experience with you. Dito ko naramdaman na komportable ako sayo at masaya akong kasama ka 🥰.</p>
+            </div>
+        </div>
+    
+        <div class="timeline-event">
+            <img src="img13.jpg" alt="Event 3" onclick="toggleDetails(3)">
+            <div class="event-date">December 1, 2024</div>
+            <div class="event-details" id="event3-details">
+                <h3>First Date as Couple</h3>
+                <p>We had an amazing experience together. Mas masaya kumpara sa unang date na hindi pa magpartner. Kakaiba yung feeling, mas naramdaman natin yung pagmamahal natin sa isa't isa. I'm so happy dahil sa wakas nagdate na tayo bilang magpartner ❤️.</p>
+            </div>
+        </div>
+    </div>
+       <br>
+       <br>
+       <br>
+       <br>
+        <h2>Countdown for a Special Day</h2>
+        <div id="countdown">
+            <p>Time left for the Valentines:</p>
+            <div id="timer"></div>
+        </div>
     
     <script>
         function scrollToSection(id) {
-            document.getElementById(id).scrollIntoView({ behavior: 'smooth' });
-        }
+    const section = document.getElementById(id);
+    if (section) {
+        section.scrollIntoView({ behavior: 'smooth' });
+    }
+}
 
-        function showMessage() {
-            document.getElementById("loveMessage").style.display = "none";
-            const fullMessage = document.getElementById("fullMessage");
-            fullMessage.style.display = "block";
-            setTimeout(() => {
-                fullMessage.style.opacity = "1";
-            }, 10);
+
+
+// Fix toggleMessage to showMessage function in JS
+function toggleMessage() {
+        const fullMessage = document.getElementById("fullMessage");
+        const button = document.querySelector("button");
+
+        // Check if the message is already visible
+        if (fullMessage.style.display === "block") {
+            fullMessage.style.display = "none"; // Hide the message
+           
+        } else {
+            fullMessage.style.display = "block"; // Show the message
+            fullMessage.style.opacity = "1"; // Make the message visible
+    
         }
+    }
 
         let currentIndex = 0;
-const imagesPerView = 1; // Adjust for small screens, 1 image at a time
 const gallery = document.querySelector(".gallery");
 const images = document.querySelectorAll(".gallery img");
 const totalImages = images.length;
@@ -259,41 +378,121 @@ const totalImages = images.length;
 function updateGallery() {
     const imageWidth = images[0].offsetWidth + 20; // Get the width dynamically with margin
     const offset = -currentIndex * imageWidth;
-    gallery.style.transform = `translateX(${offset}px)`;
-}
-
-function nextSlide() {
-    if (currentIndex < totalImages - imagesPerView) {
-        currentIndex++;
-        updateGallery();
-    }
+    gallery.style.transform = `translateX(${offset}px)`; // Fixed with backticks
 }
 
 function prevSlide() {
-    if (currentIndex > 0) {
-        currentIndex--;
-        updateGallery();
-    }
+    // Go to the previous slide
+    currentIndex = (currentIndex === 0) ? totalImages - 1 : currentIndex - 1;
+    updateGallery();
+}
+
+function nextSlide() {
+    // Go to the next slide
+    currentIndex = (currentIndex === totalImages - 1) ? 0 : currentIndex + 1;
+    updateGallery();
 }
 
 window.addEventListener("resize", updateGallery);  // Recalculate on window resize
-function toggleMessage() {
-    const fullMessage = document.getElementById("fullMessage");
-    const loveMessage = document.getElementById("loveMessage");
 
-    if (fullMessage.style.display === "block") {
-        // Hide the message
-        fullMessage.style.display = "none";
-        loveMessage.style.display = "block"; // Show the initial message again
+
+// Toggle event details when image is clicked, ensuring hover still works
+function toggleDetails(eventId) {
+    const details = document.getElementById(`event${eventId}-details`);
+    const image = document.querySelector(`#event${eventId} img`);
+    if (details.style.display === "block") {
+        details.style.display = "none";  // Hide event details
+        image.style.transform = "scale(1)";  // Reset hover scale when details are hidden
     } else {
-        // Show the message
-        loveMessage.style.display = "none";
-        fullMessage.style.display = "block";
-        setTimeout(() => {
-            fullMessage.style.opacity = "1";
-        }, 10);
+        details.style.display = "block";  // Show event details
     }
 }
+
+
+// Set the target date and time for the countdown
+const targetDate = new Date("February 14, 2025 00:00:00").getTime();
+
+// Function to update the countdown
+function updateCountdown() {
+    const now = new Date().getTime(); // Get current time
+    const distance = targetDate - now; // Time difference between now and target date
+
+    // Time calculations for days, hours, minutes, and seconds
+    const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+    const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+    const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+    const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+    // Display the countdown in the timer div
+    document.getElementById("timer").innerHTML = `${days}d ${hours}h ${minutes}m ${seconds}s`;
+
+
+    // If the countdown is finished
+    if (distance < 0) {
+        clearInterval(countdownInterval); // Stop the countdown
+        document.getElementById("timer").innerHTML = "The special day has arrived!";
+    }
+}
+
+// Update the countdown every 1 second
+const countdownInterval = setInterval(updateCountdown, 1000);
+
+// Call the updateCountdown function initially to show the countdown right away
+updateCountdown();
+
+document.addEventListener("DOMContentLoaded", () => {
+    const texts = [
+        "Welcome to Our Special Page, My Love ❤️",
+        "This is a page where we remember our moments together.",
+        "I Love You 💗",
+         "Enjoy Love"
+
+    ];
+
+    let currentIndex = 0;
+    const heading = document.getElementById('homepage-heading');
+    const paragraph = document.getElementById('homepage-paragraph');
+    
+    function typeText(element, text, speed, callback) {
+        let i = 0;
+        element.style.visibility = 'visible'; // Make the element visible
+        element.innerHTML = ""; // Clear the content
+        function typingEffect() {
+            if (i < text.length) {
+                element.innerHTML += text.charAt(i);
+                i++;
+                setTimeout(typingEffect, speed); // Continue typing the next character
+            } else {
+                setTimeout(callback, 1000); // Wait 1 second after typing finishes before calling the callback
+            }
+        }
+        typingEffect();
+    }
+
+    function cycleTexts() {
+        // Clear the text before starting to type a new message
+        heading.innerHTML = "";
+        paragraph.innerHTML = "";
+
+        // Determine which element to type in (heading or paragraph)
+        let elementToType = (currentIndex % 2 === 0) ? heading : paragraph;
+
+        // Start typing the next message
+        typeText(elementToType, texts[currentIndex], 100, () => {
+            // After typing finishes, hide the element before the next cycle
+            elementToType.style.visibility = 'hidden';
+            currentIndex = (currentIndex + 1) % texts.length; // Move to the next message in the array
+            setTimeout(cycleTexts, 1000); // Wait for 1 second before the next cycle starts
+        });
+    }
+
+    // Start the loop
+    cycleTexts();
+});
+
+
+
+
     </script>
 </body>
 </html>
