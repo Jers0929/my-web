@@ -60,70 +60,70 @@
     }
 
     .heart-left, .heart-right {
-        position: absolute;
-        width: 35px;
-        height: 35px;
-        background-color: red;
-        transform: rotate(45deg);
-        animation: pulse 1.5s infinite;
-    }
+    position: absolute;
+    width: 25px;  /* Smaller size */
+    height: 25px;  /* Smaller size */
+    background-color: red;
+    transform: rotate(45deg);
+    animation: pulse 1.5s infinite;
+}
 
-    .heart-left::before,
-    .heart-left::after,
-    .heart-right::before,
-    .heart-right::after {
-        content: '';
-        position: absolute;
-        width: 35px;
-        height: 35px;
-        background-color: red;
-        border-radius: 50%;
-    }
+.heart-left::before,
+.heart-left::after,
+.heart-right::before,
+.heart-right::after {
+    content: '';
+    position: absolute;
+    width: 25px;  /* Smaller size */
+    height: 25px;  /* Smaller size */
+    background-color: red;
+    border-radius: 50%;
+}
 
-    /* Left Heart */
-    .heart-left {
-        top: 20%;
-        left: 10px;
-    }
+/* Left Heart */
+.heart-left {
+    top: 15%;  /* Moved higher */
+    left: 5px; /* Adjusted for better placement */
+}
 
-    .heart-left::before {
-        left: 0;
-        top: -25px;
-    }
+.heart-left::before {
+    left: 0;
+    top: -18px;  /* Adjusted for new size */
+}
 
-    .heart-left::after {
-        left: -25px;
-        top: 0;
-    }
+.heart-left::after {
+    left: -18px;
+    top: 0;
+}
 
-    /* Right Heart */
-    .heart-right {
-        top: 20%;
-        right: 10px;
-    }
+/* Right Heart */
+.heart-right {
+    top: 15%;   /* Moved higher */
+    right: 5px; /* Adjusted for better placement */
+}
 
-    .heart-right::before {
-        left: 0;
-        top: -25px;
-    }
+.heart-right::before {
+    left: 0;
+    top: -18px;  /* Adjusted for new size */
+}
 
-    .heart-right::after {
-        left: -25px;
-        top: 0;
-    }
+.heart-right::after {
+    left: -18px;
+    top: 0;
+}
 
-    /* Animation to make the heart pulse */
-    @keyframes pulse {
-        0% {
-            transform: scale(1) rotate(45deg);
-        }
-        50% {
-            transform: scale(1.2) rotate(45deg);
-        }
-        100% {
-            transform: scale(1) rotate(45deg);
-        }
+/* Animation to make the heart pulse */
+@keyframes pulse {
+    0% {
+        transform: scale(1) rotate(45deg);
     }
+    50% {
+        transform: scale(1.2) rotate(45deg);
+    }
+    100% {
+        transform: scale(1) rotate(45deg);
+    }
+}
     .gallery {
         display: flex;
         flex-wrap: wrap;
