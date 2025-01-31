@@ -1,0 +1,313 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>For My Love</title>
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        body {
+            background: linear-gradient(to right, #ff758c, #ff7eb3);
+            font-family: Arial, sans-serif;
+            text-align: center;
+            color: white;
+            margin: 0;
+            padding: 0;
+            body {
+        position: relative; /* Required for absolute positioning of hearts */
+    }
+
+        }
+        header {
+            background: rgba(255, 255, 255, 0.2);
+            padding: 15px;
+            box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
+        }
+        nav button {
+            background-color: #ff4b5c;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            margin: 5px;
+            border-radius: 20px;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+        nav button:hover {
+            background-color: #ff1e42;
+        }
+        .section {
+            padding: 50px 20px;
+        }
+        .gallery img {
+            width: 200px;
+            height: auto;
+            margin: 10px;
+            border-radius: 15px;
+            box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.3);
+        }
+        
+        
+        .logo {
+        width: 200px;  /* Adjust size of the logo */
+        height: 200px;  /* Ensure it's a square for perfect circle */
+        border-radius: 50%;  /* Make the logo circular */
+        object-fit: cover;  /* Make sure the image fits well within the circle */
+        margin-top: 20px;
+        display: block;
+        margin-left: auto;
+        margin-right: auto;
+    }
+
+    .heart-left, .heart-right {
+        position: absolute;
+        width: 50px;
+        height: 50px;
+        background-color: red;
+        transform: rotate(45deg);
+        animation: pulse 1.5s infinite;
+    }
+
+    .heart-left::before,
+    .heart-left::after,
+    .heart-right::before,
+    .heart-right::after {
+        content: '';
+        position: absolute;
+        width: 50px;
+        height: 50px;
+        background-color: red;
+        border-radius: 50%;
+    }
+
+    /* Left Heart */
+    .heart-left {
+        top: 20%;
+        left: 10px;
+    }
+
+    .heart-left::before {
+        left: 0;
+        top: -25px;
+    }
+
+    .heart-left::after {
+        left: -25px;
+        top: 0;
+    }
+
+    /* Right Heart */
+    .heart-right {
+        top: 20%;
+        right: 10px;
+    }
+
+    .heart-right::before {
+        left: 0;
+        top: -25px;
+    }
+
+    .heart-right::after {
+        left: -25px;
+        top: 0;
+    }
+
+    /* Animation to make the heart pulse */
+    @keyframes pulse {
+        0% {
+            transform: scale(1) rotate(45deg);
+        }
+        50% {
+            transform: scale(1.2) rotate(45deg);
+        }
+        100% {
+            transform: scale(1) rotate(45deg);
+        }
+    }
+    .gallery {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+    }
+
+    .gallery-item {
+        position: relative;
+        margin: 10px;
+    }
+
+    .gallery-item img {
+        width: 200px;
+        height: auto;
+        border-radius: 15px;
+        box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.3);
+        transition: transform 0.3s ease;
+    }
+
+    .gallery-item img:hover {
+        transform: scale(1.1);
+    }
+
+    .date-overlay {
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background-color: rgba(0, 0, 0, 0.7);
+        color: white;
+        display: none;
+        justify-content: center;
+        align-items: center;
+        font-size: 18px;
+        border-radius: 15px;
+        text-align: center;
+        padding: 10px;
+    }
+
+    .gallery-item:hover .date-overlay {
+        display: flex;
+    }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>❤️❤️❤️</h1>
+        <nav>
+            <button onclick="scrollToSection('home')">Home</button>
+            <button onclick="scrollToSection('letter')">Love Letter</button>
+            <button onclick="scrollToSection('gallery')">Gallery</button>
+            <button onclick="scrollToSection('playlist')">Playlist</button>
+        </nav>
+    </header>
+    <div class="heart-left"></div>
+<div class="heart-right"></div>
+    <section id="home" class="section">
+        <h2>Welcome to this simple webpage, My Love! ❤️</h2>
+        <p>This webpage is specially made just for you. I Hope You Like it. I love you so much! 💕</p>
+            <img src="img11.jpg" alt="Logo" class="logo">
+            
+    </section>
+    
+    <section id="letter" class="section">
+        <h2>My Love Letter to You</h2>
+        <p id="loveMessage">Click mo po yung button para mabasa mo 🥰</p>
+        <button onclick="showMessage()">View Message</button>
+
+        <div id="fullMessage" style="display: none; margin-top: 20px;">
+            <p>My Dearest Love/Baby,</p>
+            <p>From the moment we met, my heart found a home in you. Every day with you feels like a beautiful journey, filled with laughter, warmth, and endless love. You have a way of making the ordinary moments feel extraordinary, and I am endlessly grateful for the happiness you bring into my life.</p>
+            <p>With every glance, every smile, and every word you speak, I fall deeper in love with you. You are my inspiration, my joy, and my everything. I want you to know that no matter what the future holds, I will always be here for you, supporting you, cherishing you, and loving you.</p>
+            <p>Thank you for being you, for your kindness, your laughter, and the way you light up my world. I am beyond blessed to call you mine, and I look forward to all the beautiful memories we’ll create together.</p>
+            <p>Forever and Always Yours, <strong>Jerwin</strong></p>
+        </div>
+    </section>
+    
+    <section id="gallery" class="section">
+        <h2>Our Sweet Memories</h2>
+        <div class="gallery">
+            <div class="gallery-item" onclick="displayDate(this)">
+                <img src="img1.jpg" alt="Memory 1">
+                <div class="date-overlay">December 1, 2024</div>
+            </div>
+            <div class="gallery-item" onclick="displayDate(this)">
+                <img src="img12.jpg" alt="Memory 1">
+                <div class="date-overlay">January 11, 2025</div>
+            </div>
+            <div class="gallery-item" onclick="displayDate(this)">
+                <img src="img4.jpg" alt="Memory 1">
+                <div class="date-overlay">August 24, 2024</div>
+            </div>
+            <div class="gallery-item" onclick="displayDate(this)">
+                <img src="img5.jpg" alt="Memory 1">
+                <div class="date-overlay">December 13, 2024</div>
+            </div>
+            <div class="gallery-item" onclick="displayDate(this)">
+                <img src="img10.jpg" alt="Memory 1">
+                <div class="date-overlay">January 5, 2025</div>
+            </div>
+            <div class="gallery-item" onclick="displayDate(this)">
+                <img src="img15.jpg" alt="Memory 1">
+                <div class="date-overlay">December 13, 2024</div>
+            </div>
+            <div class="gallery-item" onclick="displayDate(this)">
+                <img src="img19.jpg" alt="Memory 1">
+                <div class="date-overlay">December 13, 2024</div>
+            </div>
+            <div class="gallery-item" onclick="displayDate(this)">
+                <img src="img6.jpg" alt="Memory 1">
+                <div class="date-overlay">January 5, 2025</div>
+            </div>
+            <div class="gallery-item" onclick="displayDate(this)">
+                <img src="img3.jpg" alt="Memory 1">
+                <div class="date-overlay">August 24, 2024</div>
+            </div>
+            <div class="gallery-item" onclick="displayDate(this)">
+                <img src="img24.jpg" alt="Memory 1">
+                <div class="date-overlay">August 16, 2024</div>
+            </div>
+            <div class="gallery-item" onclick="displayDate(this)">
+                <img src="img7.jpg" alt="Memory 1">
+                <div class="date-overlay">December 1, 2024</div>
+            </div>
+            <div class="gallery-item" onclick="displayDate(this)">
+                <img src="img17.jpg" alt="Memory 1">
+                <div class="date-overlay">December 1, 2024</div>
+            </div>
+            <div class="gallery-item" onclick="displayDate(this)">
+                <img src="img18.jpg" alt="Memory 1">
+                <div class="date-overlay">December 19, 2024</div>
+            </div>
+            <div class="gallery-item" onclick="displayDate(this)">
+                <img src="25.jpg" alt="Memory 1">
+                <div class="date-overlay">January 5, 2025</div>
+            </div>
+            <div class="gallery-item" onclick="displayDate(this)">
+                <img src="img16.jpg" alt="Memory 1">
+                <div class="date-overlay">January 5, 2025</div>
+            </div>
+            <div class="gallery-item" onclick="displayDate(this)">
+                <img src="img20.jpg" alt="Memory 1">
+                <div class="date-overlay">January 18, 2025</div>
+            </div>
+            <div class="gallery-item" onclick="displayDate(this)">
+                <img src="img21.jpg" alt="Memory 1">
+                <div class="date-overlay">January 11, 2025</div>
+            </div>
+            <div class="gallery-item" onclick="displayDate(this)">
+                <img src="img22.jpg" alt="Memory 1">
+                <div class="date-overlay">December 19, 2024</div>
+            </div>
+            <div class="gallery-item" onclick="displayDate(this)">
+                <img src="img23.jpg" alt="Memory 1">
+                <div class="date-overlay">December 19, 2024</div>
+            </div>
+            <div class="gallery-item" onclick="displayDate(this)">
+                <img src="img13.jpg" alt="Memory 1">
+                <div class="date-overlay">August 16, 2024</div>
+            </div>
+        </div>
+    </section>
+    
+    <section id="playlist" class="section">
+        <h2>Our Love Songs 🎶</h2>
+        <iframe style="border-radius:12px" src="https://open.spotify.com/embed/track/4WgViu9gw3qYOr3iF9OuLG?utm_source=generator" width="100%" height="80" frameBorder="0" allowfullscreen="" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe>
+        <iframe style="border-radius:12px" src="https://open.spotify.com/embed/track/1hJtJvPX9knMysNDQw0HDJ?utm_source=generator" width="100%" height="80" frameBorder="0" allowfullscreen="" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe>
+        <iframe style="border-radius:12px" src="https://open.spotify.com/embed/track/06IkOr83qPqa3yYvrIjgxp?utm_source=generator" width="100%" height="80" frameBorder="0" allowfullscreen="" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe>
+  
+    </section>
+    
+    <script>
+        function scrollToSection(id) {
+            document.getElementById(id).scrollIntoView({ behavior: 'smooth' });
+        }
+        function showMessage() {
+        document.getElementById("loveMessage").style.display = "none"; // Hide the initial message
+        document.getElementById("fullMessage").style.display = "block"; // Show the full message
+    }
+        function displayDate(element) {
+        const overlay = element.querySelector('.date-overlay');
+        overlay.style.display = overlay.style.display === 'flex' ? 'none' : 'flex';
+    }
+    </script>
+</body>
+</html>
