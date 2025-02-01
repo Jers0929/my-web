@@ -18,11 +18,15 @@
         }
 
         header {
-            position: fixed;
-            top: 10px;
-            left: 10px;
-            z-index: 10; /* Ensure buttons stay on top */
-        }
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    background-color: rgba(0, 0, 0, 0.5); /* Make buttons readable */
+    padding: 10px;
+    z-index: 100;
+    text-align: center;
+}
         .container {
             padding: 50px;
         }
@@ -41,39 +45,35 @@
 }
 
 .home-section h2, .home-section p {
-    display: inline-block;    /* Keep text on the same line */
-    white-space: nowrap;      /* Prevent wrapping of text */
-    overflow: hidden;         /* Hide overflowing text */
-    font-size: 30px;          /* Adjust font size */
-    visibility: hidden;       /* Hide text initially */
-    margin: 0;                /* Remove any margins */
-    padding-right: 5px;       /* Simulate a typing cursor effect */
-    border-right: 4px solid black; /* Optional cursor styling */
-}
+        display: block;  
+        font-size: 24px; /* Reduce size for smaller screens */
+        white-space: normal; 
+        border-right: none; /* Remove cursor effect */
+    }
 
 .home-section p {
     margin-top: 20px; /* Space between the h2 and p */
 }
+.nav-buttons {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+}
 
-nav button {
-    background-color: rgb(14, 13, 13); /* Dark red background for buttons */
-    color: rgb(3, 3, 3);  /* White text */
+.nav-buttons button {
+    font-size: 14px;
+        margin: 5px; /* Reduce margin for mobile */
+    color: black; /* Fix text color */
+    background-color: #ecdadd;
     border: none;
-    padding: 12px 20px;  /* Larger padding for better clickability */
-    margin: 0 10px;
-    border-radius: 25px;  /* Rounded corners for buttons */
+    padding: 10px 15px;
+    border-radius: 25px;
     cursor: pointer;
-    font-size: 16px;
-    transition: background-color 0.3s, transform 0.3s ease;
+    transition: background 0.3s ease;
 }
 
-nav button:hover {
-    background-color: #ff3b3b;  /* Lighter red on hover */
-    transform: scale(1.1);  /* Slight scale effect on hover */
-}
-
-nav button:focus {
-    outline: none;  /* Remove default outline on button click */
+.nav-buttons button:hover {
+    background-color: hsl(0, 90%, 49%);
 }
 
         /* For sections */
@@ -175,8 +175,8 @@ nav button:focus {
         }
 
         .timeline-event img {
-    width: 230px;
-    height: 230px;
+    width: 200px;
+    height: 200px;
     object-fit: contain;
     border-radius: 10px;
     cursor: pointer;
@@ -237,7 +237,6 @@ nav button:focus {
     <section id="home" class="home-section">
         <h2 id="homepage-heading">Welcome to this simple webpage, My Love! ❤️</h2>
         <p id="homepage-paragraph">This is a page where we remember our moments together.</p>
-        <p id="homepage-paragraph">I Love You.</p>
             <img src="img11.jpg" alt="Logo" class="logo">
 
             
@@ -249,12 +248,12 @@ nav button:focus {
         <button onclick="toggleMessage()">View Message</button>
     
         <div id="fullMessage">
-            <p>My Dearest Love,</p>
-            <p>From the moment we met, my heart found a home in you. Every day with you feels like a beautiful journey, filled with laughter, warmth, and endless love. You have a way of making the ordinary moments feel extraordinary, and I am endlessly grateful for the happiness you bring into my life.</p>
+            <p>Hey Love,</p>
+            <p>It's 1st day of February! 💖 Isang bagong buwan na naman na puno ng pagkakataong iparamdam ko kung gaano kita kamahal. Sana lagi tayong masaya at patuloy nating alagaan ang isa’t isa.</p>
             
-            <p>With every glance, every smile, and every word you speak, I fall deeper in love with you. You are my inspiration, my joy, and my everything. I want you to know that no matter what the future holds, I will always be here for you, supporting you, cherishing you, and loving you.</p>
+            <p>Sana iwasan natin ang mga away hangga't maaari at lagi nating ayusin kapag may hindi pagkakaintindihan. Gusto ko lang na lagi tayong okay at magkasama sa lahat ng bagay. Ikaw ang pinakamahalaga sa akin, at hinding-hindi ako magsasawang ipakita yon sayo.</p>
             
-            <p>Thank you for being you, for your kindness, your laughter, and the way you light up my world. I am beyond blessed to call you mine, and I look forward to all the beautiful memories we’ll create together.</p>
+            <p>Mahal na mahal kita, Love ko! Let’s make this month full of love and happiness. 💕</p>
             
             <p>Forever and always yours,</p>
             <p><strong>Jerwin</strong></p>
@@ -345,100 +344,86 @@ nav button:focus {
         </div>
     
     <script>
-        function scrollToSection(id) {
+        // Scroll to section smoothly
+function scrollToSection(id) {
     const section = document.getElementById(id);
     if (section) {
         section.scrollIntoView({ behavior: 'smooth' });
     }
 }
 
-
-
-// Fix toggleMessage to showMessage function in JS
+// Toggle Love Letter visibility
 function toggleMessage() {
-        const fullMessage = document.getElementById("fullMessage");
-        const button = document.querySelector("button");
-
-        // Check if the message is already visible
-        if (fullMessage.style.display === "block") {
-            fullMessage.style.display = "none"; // Hide the message
-           
-        } else {
-            fullMessage.style.display = "block"; // Show the message
-            fullMessage.style.opacity = "1"; // Make the message visible
-    
-        }
+    const fullMessage = document.getElementById("fullMessage");
+    if (fullMessage.style.display === "block") {
+        fullMessage.style.opacity = "0";
+        setTimeout(() => {
+            fullMessage.style.display = "none";
+        }, 500);
+    } else {
+        fullMessage.style.display = "block";
+        setTimeout(() => {
+            fullMessage.style.opacity = "1";
+        }, 50);
     }
+}
 
-        let currentIndex = 0;
+// Gallery Slider
+let currentIndex = 0;
 const gallery = document.querySelector(".gallery");
 const images = document.querySelectorAll(".gallery img");
 const totalImages = images.length;
 
 function updateGallery() {
-    const imageWidth = images[0].offsetWidth + 20; // Get the width dynamically with margin
-    const offset = -currentIndex * imageWidth;
-    gallery.style.transform = `translateX(${offset}px)`; // Fixed with backticks
+    const imageWidth = images[0].clientWidth + 20; // Corrected image width
+    gallery.style.transform = `translateX(${-currentIndex * imageWidth}px)`;
 }
 
 function prevSlide() {
-    // Go to the previous slide
     currentIndex = (currentIndex === 0) ? totalImages - 1 : currentIndex - 1;
     updateGallery();
 }
 
 function nextSlide() {
-    // Go to the next slide
     currentIndex = (currentIndex === totalImages - 1) ? 0 : currentIndex + 1;
     updateGallery();
 }
 
-window.addEventListener("resize", updateGallery);  // Recalculate on window resize
+window.addEventListener("resize", updateGallery);
 
-
-// Toggle event details when image is clicked, ensuring hover still works
+// Toggle event details correctly
 function toggleDetails(eventId) {
     const details = document.getElementById(`event${eventId}-details`);
-    const image = document.querySelector(`#event${eventId} img`);
     if (details.style.display === "block") {
-        details.style.display = "none";  // Hide event details
-        image.style.transform = "scale(1)";  // Reset hover scale when details are hidden
+        details.style.display = "none";
     } else {
-        details.style.display = "block";  // Show event details
+        details.style.display = "block";
     }
 }
 
-
-// Set the target date and time for the countdown
+// Countdown Timer
 const targetDate = new Date("February 14, 2025 00:00:00").getTime();
 
-// Function to update the countdown
 function updateCountdown() {
-    const now = new Date().getTime(); // Get current time
-    const distance = targetDate - now; // Time difference between now and target date
+    const now = new Date().getTime();
+    const distance = targetDate - now;
 
-    // Time calculations for days, hours, minutes, and seconds
+    if (distance < 0) {
+        document.getElementById("timer").innerHTML = "Happy Valentine's Day! ❤️";
+        return;
+    }
+
     const days = Math.floor(distance / (1000 * 60 * 60 * 24));
     const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
     const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
     const seconds = Math.floor((distance % (1000 * 60)) / 1000);
 
-    // Display the countdown in the timer div
     document.getElementById("timer").innerHTML = `${days}d ${hours}h ${minutes}m ${seconds}s`;
-
-
-    // If the countdown is finished
-    if (distance < 0) {
-        clearInterval(countdownInterval); // Stop the countdown
-        document.getElementById("timer").innerHTML = "The special day has arrived!";
-    }
 }
 
-// Update the countdown every 1 second
-const countdownInterval = setInterval(updateCountdown, 1000);
-
-// Call the updateCountdown function initially to show the countdown right away
+setInterval(updateCountdown, 1000);
 updateCountdown();
+
 
 document.addEventListener("DOMContentLoaded", () => {
     const texts = [
