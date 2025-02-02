@@ -14,7 +14,7 @@
             margin: 0;
             padding: 0;
             position: relative; 
-            padding-top: 60px; /* To prevent content from hiding under the fixed navbar */
+            padding-top: 60px; 
         }
 
         header {
@@ -22,8 +22,7 @@
     top: 0;
     left: 0;
     width: 100%;
-    background-color: rgba(0, 0, 0, 0.5); /* Make buttons readable */
-    padding: 10px;
+    background-color: rgba(0, 0, 0, 0.5); 
     z-index: 100;
     text-align: center;
 }
@@ -37,11 +36,11 @@
       
         .home-section {
     display: flex;
-    justify-content: center;  /* Center content horizontally */
-    align-items: center;      /* Center content vertically */
-    height: 100vh;            /* Full viewport height to center vertically */
-    flex-direction: column;   /* Stack text elements vertically */
-    text-align: center;       /* Center text alignment */
+    justify-content: center; 
+    align-items: center;      
+    height: 100vh;            
+    flex-direction: column;   
+    text-align: center;    
 }
 
 .home-section h2, .home-section p {
@@ -49,7 +48,8 @@
         font-size: 24px; /* Reduce size for smaller screens */
         white-space: normal; 
         border-right: none; /* Remove cursor effect */
-    }
+}
+
 
 .home-section p {
     margin-top: 20px; /* Space between the h2 and p */
@@ -61,7 +61,7 @@
 }
 
 .nav-buttons button {
-      max-width: 100px; /* Adjust as needed */
+    max-width: 100px; /* Adjust as needed */
     width: auto; /* Prevents full width */
     display: inline-block; /* Keeps buttons inline */
     font-size: 11px;
@@ -74,6 +74,7 @@
     cursor: pointer;
     transition: background 0.3s ease;
 }
+
 
 .nav-buttons button:hover {
     background-color: hsl(0, 90%, 49%);
@@ -223,6 +224,24 @@
             font-weight: bold;
             color: #ff4b5c;
         }
+        #addImageBtn {
+    background-color: #ff4081; /* Pinkish color */
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    font-size: 16px;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: 0.3s;
+    display: block;
+    margin: 10px auto;
+    box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.3);
+}
+
+#addImageBtn:hover {
+    background-color: #e91e63; /* Darker pink */
+    transform: scale(1.05);
+}
     </style>
 </head>
 <body>
@@ -295,7 +314,9 @@
             </div>
             <button class="gallery-btn next" onclick="nextSlide()">&#10095;</button>  
         </div>
-                
+        <button id="addImageBtn">Add Image</button>
+        <input type="file" id="imageInput" accept="image/*" style="display: none;">
+        <p id="uploadMessage" style="display: none; color: green; font-weight: bold; margin-top: 10px;"></p>
     </section>
     
     <section id="playlist" class="section">
@@ -478,8 +499,45 @@ document.addEventListener("DOMContentLoaded", () => {
     cycleTexts();
 });
 
+const addImageBtn = document.getElementById("addImageBtn");
+    const imageInput = document.getElementById("imageInput");
+    const uploadMessage = document.getElementById("uploadMessage");
 
+    // Show file picker when button is clicked
+    addImageBtn.addEventListener("click", () => {
+        imageInput.click();
+    });
 
+    // Handle file selection and add to gallery
+    imageInput.addEventListener("change", function(event) {
+        const file = event.target.files[0];
+        if (file) {
+            const reader = new FileReader();
+            reader.onload = function(e) {
+                const img = document.createElement("img");
+                img.src = e.target.result;
+                img.alt = "New Memory";
+                img.style.width = "100%";
+                img.style.maxWidth = "240px";
+                img.style.margin = "10px";
+                img.style.borderRadius = "15px";
+                img.style.boxShadow = "2px 2px 10px rgba(0, 0, 0, 0.3)";
+                
+                // Append image to the existing 'gallery' element
+                gallery.appendChild(img);
+
+                // Show confirmation message
+                uploadMessage.textContent = "Image Uploaded!";
+                uploadMessage.style.display = "block";
+
+                // Hide the message after 3 seconds
+                setTimeout(() => {
+                    uploadMessage.style.display = "none";
+                }, 3000);
+            };
+            reader.readAsDataURL(file);
+        }
+    });
 
     </script>
 </body>
