@@ -108,17 +108,18 @@
             transition: transform 0.5s ease-in-out;
             width: auto;
         }
-
         .gallery img {
             width: 100%;  /* Images will now take up the full container width */
-            max-width: 240px; /* This will limit image size for larger screens */
+            max-width: 200px; /* This will limit image size for larger screens */
+            object-fit: contain;
             height: auto;  /* Maintain aspect ratio */
-            margin: 10px;
-            border-radius: 15px;
+            margin: 7px;
+            border-radius: 10px;
             box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.3);
             transition: transform 0.3s ease-in-out;
             cursor: pointer;
         }
+
 
         @media (max-width: 768px) {
             .gallery img {
