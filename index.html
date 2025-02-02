@@ -501,149 +501,60 @@ document.addEventListener("DOMContentLoaded", () => {
 });
 
 const addImageBtn = document.getElementById("addImageBtn");
-    const imageInput = document.getElementById("imageInput");
-    const uploadMessage = document.getElementById("uploadMessage");
+const imageInput = document.getElementById("imageInput");
+const uploadMessage = document.getElementById("uploadMessage");
 
-    // Show file picker when button is clicked
-    addImageBtn.addEventListener("click", () => {
-        imageInput.click();
-    });
+// Show file picker when button is clicked
+addImageBtn.addEventListener("click", () => {
+    imageInput.click();
+});
 
-    // Handle file selection and add to gallery
-    imageInput.addEventListener("change", function(event) {
-        const file = event.target.files[0];
-        if (file) {
-            const reader = new FileReader();
-            reader.onload = function(e) {
-                const img = document.createElement("img");
-                img.src = e.target.result;
-                img.alt = "New Memory";
-                img.style.width = "100%";
-                img.style.maxWidth = "240px";
-                img.style.margin = "10px";
-                img.style.borderRadius = "15px";
-                img.style.boxShadow = "2px 2px 10px rgba(0, 0, 0, 0.3)";
-                
-                // Append image to the existing 'gallery' element
-                gallery.appendChild(img);
-
-                // Show confirmation message
-                uploadMessage.textContent = "Image Uploaded!";
-                uploadMessage.style.display = "block";
-
-                // Hide the message after 3 seconds
-                setTimeout(() => {
-                    uploadMessage.style.display = "none";
-                }, 3000);
-            };
-            reader.readAsDataURL(file);
-        }
-    });
-// Open IndexedDB database
-let db;
-
-const request = indexedDB.open("memoryGallery", 1);
-
-// Create the object store for images
-request.onsuccess = function (event) {
-    db = event.target.result;
-};
-
-request.onerror = function (event) {
-    console.log("Database error: " + event.target.errorCode);
-};
-
-request.onupgradeneeded = function (event) {
-    db = event.target.result;
-
-    // Create an object store to hold images (if it doesn't exist)
-    const objectStore = db.createObjectStore("images", { keyPath: "id", autoIncrement: true });
-    objectStore.createIndex("image", "image", { unique: false });
-};
-
-// Add image to the IndexedDB
-function saveImageToDB(imageData) {
-    const transaction = db.transaction(["images"], "readwrite");
-    const objectStore = transaction.objectStore("images");
-    const newImage = {
-        image: imageData
-    };
-
-    const request = objectStore.add(newImage);
-
-    request.onsuccess = function () {
-        console.log("Image added to IndexedDB");
-    };
-
-    request.onerror = function (event) {
-        console.log("Error adding image: " + event.target.errorCode);
-    };
-}
-
-// Retrieve images from IndexedDB
-function loadImagesFromDB() {
-    const transaction = db.transaction(["images"], "readonly");
-    const objectStore = transaction.objectStore("images");
-    const request = objectStore.getAll();
-
-    request.onsuccess = function () {
-        const images = request.result;
-        const gallery = document.querySelector(".gallery");
-
-        images.forEach(function (image) {
-            const imgElement = document.createElement("img");
-            imgElement.src = image.image;
-            imgElement.alt = "Memory";
-            gallery.appendChild(imgElement);
-        });
-    };
-
-    request.onerror = function (event) {
-        console.log("Error loading images: " + event.target.errorCode);
-    };
-}
-
-// Event listener for image upload
-imageInput.addEventListener("change", function (event) {
+// Handle file selection and add to gallery
+imageInput.addEventListener("change", function(event) {
     const file = event.target.files[0];
     if (file) {
         const reader = new FileReader();
+        reader.onload = function(e) {
+            // Save the image URL to localStorage
+            let images = JSON.parse(localStorage.getItem('uploadedImages')) || [];
+            images.push(e.target.result); // Add new image to the array
+            localStorage.setItem('uploadedImages', JSON.stringify(images)); // Save back to localStorage
 
-        reader.onload = function (e) {
-            const imageData = e.target.result;
-
-            // Save the image to IndexedDB
-            saveImageToDB(imageData);
-
-            // Update the gallery with the new image
-            const gallery = document.querySelector(".gallery");
-            const imgElement = document.createElement("img");
-            imgElement.src = imageData;
-            imgElement.alt = "New Memory";
-            imgElement.style.width = "100%";
-            imgElement.style.maxWidth = "240px";
-            imgElement.style.margin = "10px";
-            imgElement.style.borderRadius = "15px";
-            imgElement.style.boxShadow = "2px 2px 10px rgba(0, 0, 0, 0.3)";
-            gallery.appendChild(imgElement);
-
-            // Show the upload message
-            uploadMessage.textContent = "Image uploaded successfully!";
+            // Show a success message
             uploadMessage.style.display = "block";
-            setTimeout(() => {
-                uploadMessage.style.display = "none";
-            }, 3000);
-        };
+            uploadMessage.textContent = "Image successfully uploaded!";
+            
+            // Optionally, update the gallery to show the uploaded image
+            const img = document.createElement("img");
+            img.src = e.target.result;
+            img.alt = "New Memory";
+            img.style.width = "100%";
+            img.style.maxWidth = "200px";
+            img.style.margin = "7px";
+            img.style.borderRadius = "10px";
+            img.style.boxShadow = "2px 2px 10px rgba(0, 0, 0, 0.3)";
 
+            document.querySelector(".gallery").appendChild(img);
+        };
         reader.readAsDataURL(file);
     }
 });
 
-// Load images from IndexedDB when the page is loaded
-window.addEventListener("load", function () {
-    loadImagesFromDB();
+// Load the images from localStorage when the page loads
+window.addEventListener("load", function() {
+    let images = JSON.parse(localStorage.getItem('uploadedImages')) || [];
+    images.forEach(imageSrc => {
+        const img = document.createElement("img");
+        img.src = imageSrc;
+        img.alt = "Memory";
+        img.style.width = "100%";
+        img.style.maxWidth = "200px";
+        img.style.margin = "7px";
+        img.style.borderRadius = "10px";
+        img.style.boxShadow = "2px 2px 10px rgba(0, 0, 0, 0.3)";
+        document.querySelector(".gallery").appendChild(img);
+    });
 });
-
     
     </script>
 </body>
