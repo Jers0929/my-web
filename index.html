@@ -124,6 +124,7 @@
         @media (max-width: 768px) {
             .gallery img {
                 max-width: 120px; /* Make images smaller on mobile screens */
+                border: 2px solid red; 
             }
         }
 
@@ -284,41 +285,43 @@
 
        
     
-    <section id="gallery" class="section">
-        <br>
-        <br>
-        <h2>Our Sweet Memories</h2>
-        <div class="gallery-container">
-            <button class="gallery-btn prev" onclick="prevSlide()">&#10094;</button>
-            <div class="gallery" id="gallery">
-                <img src="img1.jpg" alt="Memory 1">
-                <img src="img12.jpg" alt="Memory 2">
-                <img src="img4.jpg" alt="Memory 3">
-                <img src="img5.jpg" alt="Memory 4">
-                <img src="img10.jpg" alt="Memory 1">
-                <img src="img15.jpg" alt="Memory 2">
-                <img src="img19.jpg" alt="Memory 3">
-                <img src="img6.jpg" alt="Memory 4">
-                <img src="img3.jpg" alt="Memory 4">
-                <img src="img24.jpg" alt="Memory 1">
-                <img src="img7.jpg" alt="Memory 2">
-                <img src="img17.jpg" alt="Memory 3">
-                <img src="img18.jpg" alt="Memory 4">
-                <img src="25.jpg" alt="Memory 4">
-                <img src="img16.jpg" alt="Memory 1">
-                <img src="img20.jpg" alt="Memory 2">
-                <img src="img21.jpg" alt="Memory 3">
-                <img src="img22.jpg" alt="Memory 4">
-                <img src="img23.jpg" alt="Memory 3">
-                <img src="img13.jpg" alt="Memory 4">
-
+        <section id="gallery" class="section">
+            <br>
+            <br>
+            <h2>Our Sweet Memories</h2>
+            <div class="gallery-container">
+                <button class="gallery-btn prev" onclick="prevSlide()">&#10094;</button>
+                <div class="gallery" id="gallery">
+                    <img src="img1.jpg" alt="Memory 1">
+                    <img src="img12.jpg" alt="Memory 2">
+                    <img src="img4.jpg" alt="Memory 3">
+                    <img src="img5.jpg" alt="Memory 4">
+                    <img src="img10.jpg" alt="Memory 1">
+                    <img src="img15.jpg" alt="Memory 2">
+                    <img src="img19.jpg" alt="Memory 3">
+                    <img src="img6.jpg" alt="Memory 4">
+                    <img src="img3.jpg" alt="Memory 4">
+                    <img src="img24.jpg" alt="Memory 1">
+                    <img src="img7.jpg" alt="Memory 2">
+                    <img src="img17.jpg" alt="Memory 3">
+                    <img src="img18.jpg" alt="Memory 4">
+                    <img src="25.jpg" alt="Memory 4">
+                    <img src="img16.jpg" alt="Memory 1">
+                    <img src="img20.jpg" alt="Memory 2">
+                    <img src="img21.jpg" alt="Memory 3">
+                    <img src="img22.jpg" alt="Memory 4">
+                    <img src="img23.jpg" alt="Memory 3">
+                    <img src="img13.jpg" alt="Memory 4">
+                </div>
+                <button class="gallery-btn next" onclick="nextSlide()">&#10095;</button>  
             </div>
-            <button class="gallery-btn next" onclick="nextSlide()">&#10095;</button>  
-        </div>
-        <button id="addImageBtn">Add Image</button>
-        <input type="file" id="imageInput" accept="image/*" style="display: none;">
-        <p id="uploadMessage" style="display: none; color: green; font-weight: bold; margin-top: 10px;"></p>
-    </section>
+        
+            <button id="addImageBtn">Add Image</button>
+    <input type="file" id="imageInput" accept="image/*" style="display: none;">
+    <p id="uploadMessage" style="display: none; color: green; font-weight: bold; margin-top: 10px;"></p>
+        
+        </section>
+        
     
     <section id="playlist" class="section">
         <h2>Our Love Songs 🎶</h2>
@@ -500,61 +503,62 @@ document.addEventListener("DOMContentLoaded", () => {
     cycleTexts();
 });
 
-const addImageBtn = document.getElementById("addImageBtn");
-const imageInput = document.getElementById("imageInput");
-const uploadMessage = document.getElementById("uploadMessage");
 
-// Show file picker when button is clicked
-addImageBtn.addEventListener("click", () => {
-    imageInput.click();
-});
+    // Cloudinary Upload Configuration
 
-// Handle file selection and add to gallery
-imageInput.addEventListener("change", function(event) {
-    const file = event.target.files[0];
-    if (file) {
-        const reader = new FileReader();
-        reader.onload = function(e) {
-            // Save the image URL to localStorage
-            let images = JSON.parse(localStorage.getItem('uploadedImages')) || [];
-            images.push(e.target.result); // Add new image to the array
-            localStorage.setItem('uploadedImages', JSON.stringify(images)); // Save back to localStorage
+    const cloudName = "dyennl3ms";  // Replace with your Cloudinary cloud name
+    const uploadPreset = "my_uploads";  // Replace with your Cloudinary upload preset
 
-            // Show a success message
-            uploadMessage.style.display = "block";
-            uploadMessage.textContent = "Image successfully uploaded!";
-            
-            // Optionally, update the gallery to show the uploaded image
-            const img = document.createElement("img");
-            img.src = e.target.result;
-            img.alt = "New Memory";
-            img.style.width = "100%";
-            img.style.maxWidth = "200px";
-            img.style.margin = "7px";
-            img.style.borderRadius = "10px";
-            img.style.boxShadow = "2px 2px 10px rgba(0, 0, 0, 0.3)";
-
-            document.querySelector(".gallery").appendChild(img);
-        };
-        reader.readAsDataURL(file);
-    }
-});
-
-// Load the images from localStorage when the page loads
-window.addEventListener("load", function() {
-    let images = JSON.parse(localStorage.getItem('uploadedImages')) || [];
-    images.forEach(imageSrc => {
-        const img = document.createElement("img");
-        img.src = imageSrc;
-        img.alt = "Memory";
-        img.style.width = "100%";
-        img.style.maxWidth = "200px";
-        img.style.margin = "7px";
-        img.style.borderRadius = "10px";
-        img.style.boxShadow = "2px 2px 10px rgba(0, 0, 0, 0.3)";
-        document.querySelector(".gallery").appendChild(img);
+    document.getElementById("addImageBtn").addEventListener("click", function () {
+        document.getElementById("imageInput").click();  // Trigger file input
     });
-});
+
+    document.getElementById("imageInput").addEventListener("change", function (event) {
+        const file = event.target.files[0];
+        if (!file) return;
+
+        const formData = new FormData();
+        formData.append("file", file);
+        formData.append("upload_preset", uploadPreset);
+
+        fetch(`https://api.cloudinary.com/v1_1/${cloudName}/image/upload`, {
+            method: "POST",
+            body: formData
+        })
+        .then(response => response.json())
+        .then(data => {
+            console.log("Cloudinary Response:", data); // Log to check the response
+
+            if (data.secure_url) {
+                // Show success message
+                document.getElementById("uploadMessage").textContent = "Image uploaded successfully!";
+                document.getElementById("uploadMessage").style.display = "block";
+                
+                // Create a new image element for the gallery
+                const newImage = document.createElement("img");
+                newImage.src = data.secure_url;  // Set the image source to the Cloudinary URL
+                newImage.alt = "Uploaded Memory";
+                newImage.style.width = "200px";  // You can adjust the image size here
+                newImage.style.margin = "10px";
+
+                // Append the image to the gallery container
+                const gallery = document.querySelector(".gallery");  // Get the gallery div
+                gallery.appendChild(newImage);  // Add the image to the gallery
+            } else {
+                // Show failure message if upload fails
+                document.getElementById("uploadMessage").textContent = "Upload failed!";
+                document.getElementById("uploadMessage").style.color = "red";
+                document.getElementById("uploadMessage").style.display = "block";
+            }
+        })
+        .catch(error => {
+            console.error("Upload failed:", error);
+            document.getElementById("uploadMessage").textContent = "Upload failed!";
+            document.getElementById("uploadMessage").style.color = "red";
+            document.getElementById("uploadMessage").style.display = "block";
+        });
+    });
+
     
     </script>
 </body>
